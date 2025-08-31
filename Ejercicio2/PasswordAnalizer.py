@@ -5,10 +5,10 @@ import string
 
 
 class PasswordAnalizer:
-    def __init__(self):
-        self.numeros = 2
-        self.mayusculas = 2
-        self.longitudMaxima = 8
+    def __init__(self, numeros:int = 2, mayusculas:int = 2, longitudMaxima:int = 8):
+        self.numeros = numeros
+        self.mayusculas = mayusculas
+        self.longitudMaxima = longitudMaxima
     
     def esClaveFuerte(self,clave):
         claveSinEspacios = clave.replace(" ", "")
