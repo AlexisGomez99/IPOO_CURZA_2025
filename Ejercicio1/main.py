@@ -1,6 +1,6 @@
 from Jugador import Jugador
 from Equipo import Equipo
-
+import csv
 
 def jugadoresMasAltos(jugadores):
     if not jugadores:
@@ -56,31 +56,75 @@ def alturaPromedio(equipos, jugadores):
     return listaPromedios
 
 def jugadoresMasPuntosPeorEquipo(equipos, jugadores):
-    puntosMaximos = 0
-    resultado = dict()
-    for e in equipos:
-        puntosMaximos = max(j.puntosTotales for j in jugadores if j.equipo == e.nombre)
-        listaJugadorPorEquipo = [j for j in jugadores if j.puntosTotales == puntosMaximos]
-        resultado[e] = listaJugadorPorEquipo
+    if not equipos:
+        return {'equipos': [], 'jugadores': []}
 
-    return resultado
+    # 1. Encontrar derrotas máximas
+    derrotasMaximas = max(e.partidosJugados - e.partidosGanados for e in equipos)
+    peoresEquipos = [e for e in equipos if (e.partidosJugados - e.partidosGanados) == derrotasMaximas]
 
-jugador1 = Jugador("Alexis Gómez","27-12-1999", "Los Angeles Lakers",1.88, 42456256 ,1000)
-jugador2 = Jugador("LeBron James","1984-12-30","Los Angeles Lakers",2.06,1234567890,1090)
-jugador3 = Jugador("Stephen Curry","1988-03-14","Golden State Warriors",1.91,2345678901,980)
-jugador4 = Jugador("Giannis Antetokounmpo","1994-12-06","Milwaukee Bucks",2.11,3456789012,1155)
-jugador5 = Jugador("Kevin Durant","1988-09-29","Phoenix Suns",2.06,4567890123,970)
-jugador6 = Jugador("Ja Morant","1999-08-10","Memphis Grizzlies",1.91,8901234567,950)
-equipo1 = Equipo("Los Angeles Lakers", "Los Ãngeles", 82, 43)
-equipo2 = Equipo("Golden State Warriors", "San Francisco", 82, 44)
-equipo3 = Equipo("Milwaukee Bucks", "Milwaukee", 82, 58)
-equipo4 = Equipo("Phoenix Suns", "Phoenix", 82, 48)
-equipo5 = Equipo("Memphis Grizzlies", "Memphis", 82, 51)
-jugadores = []
-equipos = []
+    # 2. Tomar los jugadores cuyo equipo (str) coincide con el nombre de esos equipos
+    nombresPeores = {e.nombre for e in peoresEquipos}
+    jugadoresEnPeores = [j for j in jugadores if j.equipo in nombresPeores]
 
-jugadores.extend([jugador1, jugador2, jugador3, jugador4, jugador5, jugador6])
-equipos.extend([equipo1,equipo2,equipo3,equipo4,equipo5])
+    if not jugadoresEnPeores:
+        return {'equipos': peoresEquipos, 'jugadores': []}
+
+    # 3. Buscar los máximos puntos
+    puntosMaximos = max(j.puntosTotales for j in jugadoresEnPeores)
+    jugadoresConMasPuntos = [j for j in jugadoresEnPeores if j.puntosTotales == puntosMaximos]
+
+    ### tengo problemas con la comparacion de nombres de equipo y el nombre no toma bien los str quizas no son parecidos y por eso no trae los jugadores.
+    return {
+        'equipos': peoresEquipos,
+        'jugadores': jugadoresConMasPuntos
+    }
+
+
+def normalizarFila(row, esperadas):
+    if not row:
+        return []
+
+    cols = row[0].split(",") if len(row) == 1 else row
+    cols = [c.strip() for c in cols if c is not None]
+
+    if len(cols) >= esperadas:
+        return cols[:esperadas]
+    return []  
+
+
+def leerEquipos(path):
+    equipos = []
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        reader = csv.reader(f, skipinitialspace=True)
+        for row in reader:
+            cols = normalizarFila(row, esperadas=4)
+            if not cols:
+                continue
+            nombre, ciudad, pj, pg = cols
+            equipos.append(Equipo(nombre, ciudad, int(pj), int(pg)))
+    return equipos
+
+
+def leerJugadores(path):
+    jugadores = []
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        reader = csv.reader(f, skipinitialspace=True)
+        for row in reader:
+            cols = normalizarFila(row, esperadas=6)
+            if not cols:
+                continue
+            nombre, fechaNac, equipo, altura, dni, puntos = cols
+            jugadores.append(Jugador(nombre, fechaNac, equipo, float(altura), int(dni), int(puntos)))
+    return jugadores
+
+
+
+
+jugadores = leerJugadores("../2025-TR-jugadores.csv")
+equipos = leerEquipos("../2025-TR-equipos.csv")
+
+
 
 print(jugadoresMasAltos(jugadores))
 print(equiposMasGanadores(equipos))
