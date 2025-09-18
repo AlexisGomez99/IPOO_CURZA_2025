@@ -7,7 +7,7 @@ class Elfo (Personaje):
     def __init__ (self, nombre, puntos_vida, puntos_ataque, puntos_defensa, elemento:str = "Sin elemento"):
         super().__init__(nombre, puntos_vida, puntos_ataque, puntos_defensa,elemento)
         self.mana = 0
-        self.puntos_regeneracion = 0
+        self.puntos_regeneracion = 0 # Olvide inicializar esta variable
     
     def set_mana(self,mana):
         self.mana = mana
