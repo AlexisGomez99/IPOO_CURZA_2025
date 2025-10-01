@@ -12,6 +12,6 @@ class Escudo (Arma):
         self.__aumento_resistencia
 
     def __str__(self):
-        return f"\nClase: Escudo\n{super().__str__()}\nAumento de resistencia: {self.__aumento_resistencia} "
+        return f"\n -Clase: Escudo\n{super().__str__()}\n  -Aumento de resistencia: {self.__aumento_resistencia} "
     def __repr__(self):
         return self.__str__()

@@ -16,6 +16,6 @@ class Espada (Arma):
         return self.__gemas
     
     def __str__(self):
-        return f"\nClase: Espada\n{super().__str__()}\nGemas: {self.__gemas} "
+        return f"\n -Clase: Espada\n{super().__str__()}\n  -Gemas: {self.__gemas} "
     def __repr__(self):
         return self.__str__()

@@ -12,7 +12,7 @@ class Personaje:
         self.elemento = elemento
         self.habilidades = []
         self.debilidades = []
-        self.arsenal:Arma = []
+        self.arsenal = []
         
 
     def set_elemento(self,elemento):
@@ -26,7 +26,8 @@ class Personaje:
     def set_nombre(self, nombre):
         self.nombre = nombre
     def set_arsenal(self, arsenal):
-        self.arsenal = arsenal
+        for arma in arsenal:
+            self.arsenal.append(arma)
 
     def agregar_arma(self, arma:Arma):
         if len(self.arsenal) < 5:
@@ -48,6 +49,8 @@ class Personaje:
         self.habilidades.remove(habilidad)
     def eliminar_debilidad(self,debilidad):
         self.debilidades.remove(debilidad)
+    def vaciar_arsenal(self):
+        self.arsenal.clear()
 
     def get_habilidades(self):
         return self.habilidades
@@ -74,14 +77,20 @@ class Personaje:
     
     def defensa(self, daño):
         sigue_vivo= False
+        aux_def = 0
 
         if self.puntos_vida > 1:
             for arma in self.arsenal:
                 if arma.get_tipo() == "DEFENSIVO":
-                    self.puntos_defensa += arma.atacar() #Consultar
-                    self.puntos_vida = self.puntos_vida - daño
-                    sigue_vivo= True
-
+                    aux_def += arma.atacar() #Consultar
+            daño_recibido = self.puntos_defensa + aux_def - daño
+            if daño_recibido >= 0:
+                daño_recibido = 0
+            self.puntos_vida= self.puntos_vida + daño_recibido
+            if self.puntos_vida > 0:
+                sigue_vivo= True
+            else:
+                print("Murio despues del ataque")
         return sigue_vivo
     
     def __str__(self):

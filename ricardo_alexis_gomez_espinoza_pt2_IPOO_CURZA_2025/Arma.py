@@ -40,6 +40,6 @@ class Arma:
         return self.__puntos_fuerza
     
     def __str__(self):
-        return f"Nombre: {self.__nombre}\nTipo: {self.__tipo}\nPuntos de Fuerza: {self.__puntos_fuerza}\nPuntos de Resistencia: {self.__puntos_resistencia}\nUsa mana: {self.__usa_mana}\nVentajas sobre: {self.__ventajas_sobre}"
+        return f"  -Nombre: {self.__nombre}\n  -Tipo: {self.__tipo}\n  -Puntos de Fuerza: {self.__puntos_fuerza}\n  -Puntos de Resistencia: {self.__puntos_resistencia}\n  -Usa mana: {self.__usa_mana}\n  -Ventajas sobre: {self.__ventajas_sobre}"
     def __repr__(self):
         return self.__str__()

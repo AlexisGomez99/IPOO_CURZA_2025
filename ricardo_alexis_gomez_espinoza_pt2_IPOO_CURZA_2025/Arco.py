@@ -12,6 +12,6 @@ class Arco (Arma):
         return self.__cantidad_flechas
     
     def __str__(self):
-        return f"\nClase: Arco\n{super().__str__()}\nCantidad de flechas: {self.__cantidad_flechas} " 
+        return f"\n -Clase: Arco\n{super().__str__()}\n  -Cantidad de flechas: {self.__cantidad_flechas} " 
     def __repr__(self):
         return self.__str__()

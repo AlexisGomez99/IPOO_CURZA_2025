@@ -14,6 +14,6 @@ class Guerrero (Personaje):
 
 
     def __str__(self):
-        return f"\nPersonaje: Guerrero. \n{super().__str__()}\nElemento: {self.elemento}\nArmadura: {self.armadura}"
+        return f"\nPersonaje: Guerrero. \n{super().__str__()}\nElemento: {self.elemento}\nArmadura: {self.armadura}\n"
     def __repr__(self):
         return self.__str__()
