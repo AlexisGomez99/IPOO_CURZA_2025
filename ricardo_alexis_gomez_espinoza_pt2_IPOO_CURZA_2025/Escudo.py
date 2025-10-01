@@ -12,7 +12,6 @@ class Escudo (Arma):
         self.__aumento_resistencia
 
     def __str__(self):
-        return f"\nClase: Escudo\nNombre: {self._Arma__nombre}\nTipo: {self._Arma__tipo}\nPuntos de fuerza: {self._Arma__puntos_fuerza}\nPuntos de resistencia: {self._Arma__puntos_resistencia}\nUsa mana: {self._Arma__usa_mana}\nVentajas sobre: {self._Arma__ventajas_sobre}\nAumento de resistencia: {self.__aumento_resistencia} "
-    
+        return f"\nClase: Escudo\n{super().__str__()}\nAumento de resistencia: {self.__aumento_resistencia} "
     def __repr__(self):
         return self.__str__()

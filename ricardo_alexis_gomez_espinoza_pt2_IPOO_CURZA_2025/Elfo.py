@@ -7,7 +7,7 @@ class Elfo (Personaje):
     def __init__ (self, nombre, puntos_vida, puntos_ataque, puntos_defensa, elemento:str = "Sin elemento"):
         super().__init__(nombre, puntos_vida, puntos_ataque, puntos_defensa,elemento)
         self.mana = 0
-        self.puntos_regeneracion = 0 # Olvide inicializar esta variable
+        self.puntos_regeneracion = 0 
     
     def set_mana(self,mana):
         self.mana = mana
@@ -22,7 +22,6 @@ class Elfo (Personaje):
 
 
     def __str__(self):
-        return f"\nPersonaje: Elfo. \nNombre: {self.nombre} \nPuntos de Vida: {self.puntos_vida}\nPuntos de Ataque: {self.puntos_ataque}\nPuntos de Defensa: {self.puntos_defensa}\nMana: {self.mana}\nPuntos de Regeneracion: {self.puntos_regeneracion}\nHabilidades: {self.habilidades}\nDebilidades: {self.debilidades}"
-
+        return f"\nPersonaje: Elfo. \n{super().__str__()}\nMana: {self.mana}\nPuntos de Regeneracion: {self.puntos_regeneracion}\n"
     def __repr__(self):
         return self.__str__()

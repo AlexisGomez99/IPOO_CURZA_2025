@@ -16,7 +16,6 @@ class Dragon (Personaje):
         
 
     def __str__(self):
-        return f"\nPersonaje: Dragon. \nNombre: {self.nombre} \nPuntos de Vida: {self.puntos_vida}\nPuntos de Ataque: {self.puntos_ataque}\nPuntos de Defensa: {self.puntos_defensa}\nMana: {self.mana}\nHabilidades: {self.habilidades}\nDebilidades: {self.debilidades}"
-
+        return f"\nPersonaje: Dragon. \n{super().__str__()}\nMana: {self.mana}"
     def __repr__(self):
         return self.__str__()

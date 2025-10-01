@@ -38,3 +38,8 @@ class Arma:
 
     def atacar(self):
         return self.__puntos_fuerza
+    
+    def __str__(self):
+        return f"Nombre: {self.__nombre}\nTipo: {self.__tipo}\nPuntos de Fuerza: {self.__puntos_fuerza}\nPuntos de Resistencia: {self.__puntos_resistencia}\nUsa mana: {self.__usa_mana}\nVentajas sobre: {self.__ventajas_sobre}"
+    def __repr__(self):
+        return self.__str__()

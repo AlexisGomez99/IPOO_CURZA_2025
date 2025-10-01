@@ -4,6 +4,7 @@ from Dragon import Dragon
 from Espada import Espada
 from Arco import Arco
 from Escudo import Escudo
+from ManejadorDePersonaje import ManejadorDePersonaje
 
 guerrero = Guerrero("Dorito", 10,10,5)
 guerrero.set_armadura(10)
@@ -46,3 +47,10 @@ escudo = Escudo("Defensivo", 15, 100,False, "Elfo",0)
 escudo.set_nombre("Escudito")
 escudo.set_aumento_resistencia(2)
 print(escudo.__str__)
+
+manejador_de_personaje = ManejadorDePersonaje()
+
+manejador_de_personaje.crear_personajes()
+manejador_de_personaje.configurar_arsenal()
+
+print(manejador_de_personaje.listar_personajes())
